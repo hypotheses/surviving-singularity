@@ -1,0 +1,138 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Singularity Container Instances Service &#8212; Singularity Survival Guide 0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Singularity workflow" href="workflow.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="singularity-container-instances-service">
+<span id="instance-services"></span><h1>Singularity Container Instances Service<a class="headerlink" href="#singularity-container-instances-service" title="Permalink to this headline">¶</a></h1>
+<p>From Singularity version 2.4 onwards, you can cleanly, reliably, and safely run services in a container.</p>
+<p>For the example here, we will start <code class="docutils literal"><span class="pre">nginx</span></code> service inside the container instance. First, we will need to put the command that we want to run in a script.:</p>
+<div class="highlight-rest"><div class="highlight"><pre><span></span>%startscript
+service nginx start
+</pre></div>
+</div>
+<div class="section" id="start-the-instance">
+<h2>Start the Instance<a class="headerlink" href="#start-the-instance" title="Permalink to this headline">¶</a></h2>
+<p>With the <code class="docutils literal"><span class="pre">%startscript</span></code> included in the singularity <code class="docutils literal"><span class="pre">nginx.simg</span></code> image. We can start the <code class="docutils literal"><span class="pre">nginx</span></code> service with:</p>
+<div class="highlight-rest"><div class="highlight"><pre><span></span>              [command]        [image]    [name of instance]
+$ singularity instance.start   nginx.img  web
+</pre></div>
+</div>
+</div>
+<div class="section" id="check-the-running-instance">
+<h2>Check the Running Instance<a class="headerlink" href="#check-the-running-instance" title="Permalink to this headline">¶</a></h2>
+<p>After start up the service instance, you can check which instances are running using:</p>
+<div class="highlight-rest"><div class="highlight"><pre><span></span>$ singularity instance.list
+INSTANCE NAME    PID      CONTAINER IMAGE
+web              790      /home/mibauer/nginx.img
+</pre></div>
+</div>
+<p>Multiple instances from the same image can be started as well.</p>
+</div>
+<div class="section" id="mount-host-folder-bind-mount">
+<h2>Mount Host Folder (Bind Mount)<a class="headerlink" href="#mount-host-folder-bind-mount" title="Permalink to this headline">¶</a></h2>
+<p>For example, if you wish to capture the output of the web1 container instance which is placed at /output/ inside the container you could do:</p>
+<div class="highlight-rest"><div class="highlight"><pre><span></span>$ singularity instance.start -B output/dir/outside/:/output/ nginx.img  web1
+</pre></div>
+</div>
+</div>
+<div class="section" id="connect-to-the-running-instance">
+<h2>Connect to the Running Instance<a class="headerlink" href="#connect-to-the-running-instance" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-rest"><div class="highlight"><pre><span></span>$ singularity instance.stop web1
+</pre></div>
+</div>
+</div>
+<div class="section" id="stop-the-running-instance">
+<h2>Stop the Running Instance<a class="headerlink" href="#stop-the-running-instance" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-rest"><div class="highlight"><pre><span></span>$ singularity instance.stop \*
+$ singularity instance.stop -a
+</pre></div>
+</div>
+<div class="section" id="reference">
+<h3>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h3>
+<p><cite>Singularity: Running Services &lt;http://singularity.lbl.gov/docs-instances&gt;</cite></p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="workflow.html" title="previous chapter">Singularity workflow</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Bhoom Suktitipat.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/instance-services.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

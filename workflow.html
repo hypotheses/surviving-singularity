@@ -1,0 +1,139 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Singularity workflow &#8212; Singularity Survival Guide 0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Singularity Container Instances Service" href="instance-services.html" />
+    <link rel="prev" title="Singularity overview" href="overview.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="singularity-workflow">
+<span id="workflow"></span><h1>Singularity workflow<a class="headerlink" href="#singularity-workflow" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="create-a-container">
+<h2>Create a Container<a class="headerlink" href="#create-a-container" title="Permalink to this headline">¶</a></h2>
+<p>There are two ways to create a container 1) as a regular folder 2) as a disk image <code class="docutils literal"><span class="pre">.simg</span></code></p>
+<ol class="arabic simple">
+<li>as a regular folder within your specified directory</li>
+</ol>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">sudo</span> <span class="pre">singularity</span> <span class="pre">build</span> <span class="pre">--sandbox</span> <span class="pre">ubuntu/</span> <span class="pre">docker://ubuntu</span></code></p>
+<p>with this option you can use <code class="docutils literal"><span class="pre">tree</span> <span class="pre">-L</span> <span class="pre">1</span> <span class="pre">ubuntu</span></code> to list the content of the current sandbox directly</p>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li>as a disk image</li>
+</ol>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">sudo</span> <span class="pre">singularity</span> <span class="pre">build</span> <span class="pre">--writable</span> <span class="pre">ubuntu.img</span> <span class="pre">docker://ubuntu</span></code></p>
+<p>For this option, you will get a single <code class="docutils literal"><span class="pre">ubuntu.img</span></code>, as a single container file.</p>
+</div></blockquote>
+</div>
+<div class="section" id="customize-the-container">
+<h2>Customize the Container<a class="headerlink" href="#customize-the-container" title="Permalink to this headline">¶</a></h2>
+<p>i.e. installed the required packages, library, software –</p>
+<ol class="arabic simple">
+<li>as a regular folder</li>
+</ol>
+<blockquote>
+<div><code class="docutils literal"><span class="pre">sudo</span> <span class="pre">singularity</span> <span class="pre">shell</span> <span class="pre">ubuntu</span></code></div></blockquote>
+<ol class="arabic simple" start="2">
+<li>as a disk image</li>
+</ol>
+<blockquote>
+<div><code class="docutils literal"><span class="pre">sudo</span> <span class="pre">singularity</span> <span class="pre">shell</span> <span class="pre">--writable</span> <span class="pre">ubuntu.img</span></code></div></blockquote>
+</div>
+<div class="section" id="building-the-container-image">
+<h2>Building the container image<a class="headerlink" href="#building-the-container-image" title="Permalink to this headline">¶</a></h2>
+<p>build into a squashfs image:</p>
+<div class="highlight-rest"><div class="highlight"><pre><span></span>sudo singularity build ubuntu.simg ubuntu/
+sudo singularity build ubuntu.simg docker://ubuntu
+</pre></div>
+</div>
+<p>This will clean up the image and only keep the differences from docker://ubuntu</p>
+<div class="section" id="reference">
+<h3>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><cite>Singularity Doc Flow &lt;http://singularity.lbl.gov/docs-flow&gt;</cite></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="overview.html" title="previous chapter">Singularity overview</a></li>
+      <li>Next: <a href="instance-services.html" title="next chapter">Singularity Container Instances Service</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Bhoom Suktitipat.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/workflow.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
