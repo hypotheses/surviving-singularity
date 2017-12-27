@@ -1,4 +1,4 @@
-.. highlightlang:: rest
+.. highlightlang:: rst
 
 .. _overview:
 
